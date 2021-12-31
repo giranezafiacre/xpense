@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>XPENCE</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% load static %}
+	<link rel="shortcut icon" type="image/png" href="{% static 'images/XP.png' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+	<div id='background'>
+		<div id='non-white-b'></div>
+		<div id='white-b'></div>
+	</div>
+	<div id="logo">
+		<img src="{% static 'images/XPENCE.png' %}" alt="not_found" srcset="">
+	</div>
+	<div id="form">
+		<h6>
+			REGISTER
+		</h6>
+		
+		{% if messages %}
+		{% for message in messages%}
+		<p style="color: blue; text-align: center;">{{message}}</p>
+		{% endfor%}
+		{%endif%}
+		<form action="" method="POST">
+			{% csrf_token %}
+			<div id="form-element">
+				
+				{{ form.non_field_errors }}
+                <div class="fieldWrapper">
+					{{ form.fullname.errors }}
+					<label class="label" for="{{ form.fullname.id_for_label }}"><strong>Name:</strong></label>
+					{{ form.fullname }}
+				</div>
+				<div class="fieldWrapper">
+					{{ form.email.errors }}
+					<label class="label" for="{{ form.email.id_for_label }}"><strong>Email:</strong></label>
+					{{ form.email }}
+				</div>
+                <div class="fieldWrapper">
+					{{ form.phone.errors }}
+					<label class="label" for="{{ form.phone.id_for_label }}"><strong>Phone:</strong></label>
+					{{ form.phone }}
+				</div>
+                <div class="fieldWrapper">
+					{{ form.password1.errors }}
+					<label class="label" for="{{ form.password1.id_for_label }}"><strong>Password:</strong></label>
+					{{ form.password1 }}
+				</div>
+                {{ form.password2 }}
+				<div class="fieldWrapper">
+					<input type="submit" class="btn btn-secondary" value="REGISTER">
+				</div>
+			</div>
+		</form>
+		<div id="create-account">
+			<span id="new-account"><span id="new">Already have account?</span> <a href="{% url 'login' %}"><span id="account">LOGIN</span></a></span> 
+		</div>
+	</div>
+    <script>
+        document.getElementById('id_password1').addEventListener('change',function(){
+            document.getElementById('id_password2').value= document.getElementById('id_password1').value;
+            console.log(document.getElementById('id_password2').value);
+        })
+    </script>
+</body>
+
+</html>

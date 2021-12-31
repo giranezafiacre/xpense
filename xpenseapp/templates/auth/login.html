@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>XPENCE</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% load static %}
+	<link rel="shortcut icon" type="image/png" href="{% static 'images/XP.png' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+
+</head>
+
+<body>
+	<div id='background'>
+		<div id='non-white-b'></div>
+		<div id='white-b'></div>
+	</div>
+	<div id="logo">
+		<img src="{% static 'images/XPENCE.png' %}" alt="not_found" srcset="">
+	</div>
+	<div id="form">
+		<h6>
+			Welcome to XPENCE
+		</h6>
+		<div id="sub-title">
+			<span>Login to continue</span>
+		</div>
+		
+		{% if messages %}
+		{% for message in messages%}
+		<p style="color: blue; text-align: center;">{{message}}</p>
+		{% endfor%}
+		{%endif%}
+		<form action="" method="POST">
+			{% csrf_token %}
+			<div id="form-element">
+				
+				{{ form.non_field_errors }}
+				<div class="fieldWrapper">
+					{{ form.email.errors }}
+					<label class="label" for="{{ form.email.id_for_label }}"><strong>Email:</strong></label>
+					{{ form.email }}
+				</div>
+				<div class="fieldWrapper">
+					{{ form.password.errors }}
+					<label class="label" for="{{ form.password.id_for_label }}"><strong>password:</strong></label>
+					{{ form.password }}
+				</div>
+				<div class="fieldWrapper">
+					<input type="submit" class="btn btn-secondary" value="Login">
+				</div>
+			</div>
+		</form>
+		<div id="forgot-password">
+			<span>Forgot password?</span>
+		</div>
+		<div id="hr"><hr></div>
+		<div id="create-account">
+			<span id="new-account"><span id="new">new?</span> <a href="{% url 'register' %}"><span id="account">create account</span></a></span> 
+		</div>
+	</div>
+</body>
+
+</html>
